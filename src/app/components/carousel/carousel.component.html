@@ -1,20 +1,19 @@
-<!-- <swiper-container
-  class="h-[300px] bg-red-300 block"
-  #swiperRef
-  initial-slide="0"
-  (swiperactiveindexchange)="onActiveIndexChange()"
-  slides-per-view="1"
-  loop="'true"
-  pagination="true"
->
+<div class="flex items-center justify-center w-full">
+  <hlm-carousel
+    class="w-full max-w-[43rem] flex justify-center rounded-lg overflow-hidden"
   >
-  <swiper-slide class="">
-    <h1>Slide 1</h1>
-  </swiper-slide>
-  <swiper-slide>
-    <h1>Slide 2</h1>
-  </swiper-slide>
-  <swiper-slide>
-    <h1>Slide 3</h1>
-  </swiper-slide>
-</swiper-container> -->
+    <hlm-carousel-content class="">
+      @for (item of items; track item) {
+      <hlm-carousel-item>
+        <img
+          class="w-full object-contain h-full block"
+          src="{{ item }}"
+          alt="hero img"
+        />
+      </hlm-carousel-item>
+      }
+    </hlm-carousel-content>
+    <button hlm-carousel-previous></button>
+    <button hlm-carousel-next></button>
+  </hlm-carousel>
+</div>
