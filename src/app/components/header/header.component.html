@@ -1,0 +1,105 @@
+<div class="max-w-screen-xl flex justify-between items-center m-auto py-4">
+  <a routerLink="/">
+    <img src="../../../assets/logo-svg.svg" alt="Logo" />
+  </a>
+  <div class="flex justify-center items-center gap-10">
+    <!-- ///////////////////////////////////////////////// -->
+    <!-- SignIn/SignUp -->
+    <button
+      class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90"
+    >
+      Đăng nhập / Đăng ký
+    </button>
+
+    <!-- ///////////////////////////////////////////////// -->
+    <!-- Search functionality -->
+    <div class="relative">
+      <button
+        *ngIf="!isSearch"
+        (click)="toggleSearch()"
+        class="absolute left-[-11px] top-[-21px]"
+      >
+        <i class="bi bi-search text-[1.5rem]"></i>
+      </button>
+
+      <div
+        class="absolute top-[-20px] z-30 right-[-20px] transition-all"
+        [ngClass]="{
+          'animate-slide-in': isSearch,
+          'animate-slide-out': !isSearch,
+          'w-96': isSearch,
+          'w-0': !isSearch
+        }"
+      >
+        <input
+          placeholder="Nhập từ khóa..."
+          *ngIf="isSearch"
+          type="text"
+          class="rounded-md border-2 shadow-lg border-gray-400 bg-white h-10 w-96 pl-4"
+        />
+        <i
+          *ngIf="isSearch"
+          (click)="toggleSearch()"
+          class="bi bi-x text-[2rem] absolute right-[2px] top-[-8px] cursor-pointer"
+        ></i>
+      </div>
+    </div>
+
+    <!-- ///////////////////////////////////////////////// -->
+    <!-- Change Language -->
+    <div
+      class="fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-black/10"
+      [ngClass]="toggle ? 'block' : 'hidden'"
+      (click)="setToggle()"
+    ></div>
+
+    <div class="relative w-[12rem] z-30">
+      <button
+        (click)="setToggle()"
+        class="flex justify-center items-center gap-2"
+      >
+        <img
+          *ngIf="currentLanguage === 'Tiếng Việt'"
+          class="w-10"
+          src="../../../assets/vn-flag.svg"
+          alt="flag icon"
+        />
+
+        <img
+          *ngIf="currentLanguage === 'English'"
+          class="w-10"
+          src="../../../assets/uk-flag.svg"
+          alt="flag icon"
+        />
+        <p>{{ currentLanguage }}</p>
+        <img
+          src="../../../assets/down-arrow.svg"
+          class="w-5"
+          alt="down arrow"
+          [ngClass]="
+            toggle ? 'rotate-180 transition-all' : 'rotate-0 transition-all'
+          "
+        />
+      </button>
+
+      <div
+        *ngIf="toggle"
+        class="bg-gray-300/90 absolute top-10 flex flex-col gap-3 p-2 rounded-md shadow-md animate-moveIn"
+      >
+        <button
+          class="flex justify-start items-center gap-2 hover:bg-gray-300/80 p-1 rounded-md"
+        >
+          <img class="w-10" src="../../../assets/vn-flag.svg" alt="flag icon" />
+          <p (click)="setLanguage('Tiếng Việt')">Tiếng Việt</p>
+        </button>
+
+        <button
+          class="flex justify-start items-center gap-2 hover:bg-gray-300/80 p-1 rounded-md"
+        >
+          <img class="w-10" src="../../../assets/uk-flag.svg" alt="flag icon" />
+          <p (click)="setLanguage('English')">English</p>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
