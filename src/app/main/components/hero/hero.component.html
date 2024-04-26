@@ -1,5 +1,5 @@
 <div
-  class="p-5 pt-10 w-full flex justify-center items-start shadow-lg border-2 rounded-lg gap-20"
+  class="p-5 pt-10 w-full flex justify-center items-center shadow-lg border-2 rounded-lg gap-20 flex-col lg:flex-row lg:items-start"
 >
   <app-carousel></app-carousel>
 
@@ -31,7 +31,7 @@
       <div class="flex justify-start items-center gap-3">
         <img
           *ngFor="let imgData of data.qualityInsurance"
-          class="w-32 object-contain"
+          class="md:w-32 object-contain w-24"
           src="{{ imgData.imgUrl }}"
           alt="Quality"
         />

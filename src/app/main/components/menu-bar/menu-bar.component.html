@@ -1,9 +1,9 @@
 <div class="mt-4">
   <div
-    class="w-full shadow-lg border-2 rounded-lg flex justify-evenly items-center p-6 font-extrabold"
+    class="w-full max-w-screen-xl shadow-lg border-2 rounded-lg flex justify-evenly flex-wrap gap-5 items-center p-6 font-extrabold"
   >
     <button
-      (click)="setActiveTab(i)"
+      (click)="setActiveTab(+i)"
       class="relative"
       *ngFor="let item of menuItems; index as i"
     >
@@ -11,49 +11,43 @@
 
       <span
         *ngIf="activeTab === i"
-        class="absolute w-full h-[4px] bg-primary bottom-[-0.7rem] left-0"
+        class="absolute w-full h-[2px] md:h-[4px] bg-primary bottom-[-0.2rem] md:bottom-[-0.7rem] left-0"
       ></span>
     </button>
   </div>
 
-  <div class="mt-4 shadow-lg w-full rounded-lg border-2]">
-    <div>
-      <h3>Truy xuất nguồn gốc</h3>
-      <p>
+  <div
+    *ngIf="activeTab === 1"
+    class="mt-4 shadow-lg border-2 w-full rounded-lg border-2] p-10"
+  >
+    <div class="mb-4 ml-10">
+      <h3 class="text-primary font-extrabold text-[1.6rem]">
+        Truy xuất nguồn gốc
+      </h3>
+      <p class="text-[1.2rem]">
         Thông tin được ghi nhật ký trong xuyên suốt quá trình sản xuất và được
         đảm bảo bởi công nghệ Blockchain
       </p>
     </div>
 
-    <!-- Container -->
-    <div>
-      <!-- task 1 -->
-      <div>
-        <h2 class="">Chế biến và đóng gói</h2>
-
-        <div>
-          <h4>Đóng gói</h4>
-          <p>Cân đúng khối lượng</p>
-          <p>Thời gian: 19/10/2023 lúc 17:20:37</p>
-          <p>Ghi nhận bởi: Công ty cổ phần Chè Việt Nam</p>
-
-          <hlm-carousel
-            class="w-full h-[300px] max-w-[43rem] bg-black text-white flex justify-center rounded-lg overflow-hidden"
-          >
-            <hlm-carousel-content class="">
-              @for (item of items; track item) {
-              <hlm-carousel-item class="w-full bg-blue-300">
-                <p class="w-[300px] h-[300px]">{{ item }}</p>
-              </hlm-carousel-item>
-              }
-            </hlm-carousel-content>
-            <button hlm-carousel-previous></button>
-            <button hlm-carousel-next></button>
-          </hlm-carousel>
-
-          <button>Xem đầy đủ nhật ký</button>
-        </div>
+    <div class="flex justify-center items-center">
+      <!-- Container -->
+      <div class="flex justify-center items-start flex-col gap-5 relative">
+        <div
+          class="absolute h-full bg-gray-300 w-[7px] left-[-37px] rounded-lg md:block hidden"
+        ></div>
+        <app-content-detail
+          *ngFor="let item of data"
+          [item]="item"
+        ></app-content-detail>
       </div>
     </div>
+  </div>
+
+  <div
+    *ngIf="activeTab !== 1"
+    class="mt-4 shadow-lg border-2 w-full rounded-lg border-2] p-10"
+  >
+    <p>Chưa có nội dung.</p>
   </div>
 </div>

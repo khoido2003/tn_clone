@@ -1,0 +1,63 @@
+<!-- task 1 -->
+
+<app-content-detail-header
+  *ngIf="item?.header"
+  [header]="item?.header"
+></app-content-detail-header>
+
+<div class="mt-4 md:p-0 p-4">
+  <div class="flex flex-col gap-1 items-start">
+    <h4 class="relative text-[1.2rem] font-extrabold">
+      {{ item?.title }}
+
+      <div class="absolute top-[6px] left-[-44px]">
+        <div
+          class="md:block hidden w-5 h-5 rounded-full bg-white z-30 border-2 border-primary_hover"
+        ></div>
+      </div>
+    </h4>
+    <p class="font-bold font-sans text-sm">
+      {{ item?.desc }}
+    </p>
+    <span class="w-full h-[0.6px] bg-gray-300"></span>
+    <p class="font-bold font-sans text-sm">Thời gian: {{ item?.time }}</p>
+    <span class="w-full h-[0.6px] bg-gray-300"></span>
+    <p class="font-bold font-sans text-sm">
+      Ghi nhận bởi: {{ item?.recordBy }}
+    </p>
+    <span class="w-full h-[0.6px] bg-gray-300"></span>
+
+    <hlm-carousel
+      class="w-full h-36 max-w-[15rem] text-white flex justify-center rounded-lg overflow-hidden"
+    >
+      <hlm-carousel-content class="">
+        @for (cur of item?.imgData; track item) {
+        <hlm-carousel-item>
+          <!-- <p class="w-[15rem] h-36 bg-blue-300">{{ cur }}</p> -->
+
+          <img src="{{ cur }}" alt="logo" />
+        </hlm-carousel-item>
+        }
+      </hlm-carousel-content>
+      <button hlm-carousel-previous></button>
+      <button hlm-carousel-next></button>
+    </hlm-carousel>
+
+    <div class="relative">
+      <button
+        (click)="setBtnName()"
+        class="bg-primary text-white px-7 py-1 rounded-md mt-6 text-sm"
+      >
+        {{ btnName }}
+      </button>
+
+      <div *ngIf="isOpenDiary" class="mt-3">
+        <app-detail-diary
+          *ngFor="let cur of item?.diaryDetail; index as i"
+          [diary]="cur"
+          [curIndex]="i + 1"
+        ></app-detail-diary>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,7 +23,21 @@ body {
   --font-sans: "";
 }
 
-.active {
+.bg-img {
+  background-image: url("./assets/bg-footer.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  *,
+  html,
+  body {
+    font-size: 50%;
+  }
 }
 
 :root {

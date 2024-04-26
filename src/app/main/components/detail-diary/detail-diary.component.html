@@ -1,0 +1,25 @@
+<div
+  class="shadow-lg border-2 p-5 rounded-lg max-w-[700px] flex flex-col justify-center items-start gap-2"
+>
+  <h3 class="font-extrabold text-primary text-[1.4rem]">
+    B{{ curIndex }}: {{ diary?.title }}
+  </h3>
+  <p class="font-bold">Thời gian: {{ diary?.time }}</p>
+  <p class="font-bold">Mô tả: {{ diary?.desc }}</p>
+
+  <hlm-carousel
+    class="w-full h-36 max-w-[15rem] text-white flex justify-center rounded-lg overflow-hidden"
+  >
+    <hlm-carousel-content class="">
+      @for (cur of diary?.imgData; track cur) {
+      <hlm-carousel-item>
+        <!-- <p class="w-[15rem] h-36 bg-blue-300">{{ cur }}</p> -->
+
+        <img src="{{ cur }}" alt="logo" />
+      </hlm-carousel-item>
+      }
+    </hlm-carousel-content>
+    <button hlm-carousel-previous></button>
+    <button hlm-carousel-next></button>
+  </hlm-carousel>
+</div>
