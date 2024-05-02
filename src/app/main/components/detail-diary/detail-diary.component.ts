@@ -10,7 +10,7 @@ export class DetailDiaryComponent {
 
   @Input() diary?: {
     title: string;
-    desc: string;
+    description: string;
     time: string;
     imgData: string[];
   };

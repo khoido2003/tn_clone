@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "paths": {
+      "@spartan-ng/ui-carousel-helm": [
+        ".\\ui-carousel-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-button-helm": [
+        ".\\src/app/ui/ui-button-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-icon-helm": [
+        ".\\src/app/ui/ui-icon-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-dialog-helm": [
+        "app/ui/ui-dialog-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-input-helm": [
+        "src/app/ui/ui-input-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-label-helm": [
+        "src/app/ui/ui-label-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-alertdialog-helm": [
+        "src/app/ui/ui-alertdialog-helm/src/index.ts"
+      ]
+    }
+  }
+}

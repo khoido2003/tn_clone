@@ -1,0 +1,40 @@
+{
+  "name": "app-ui-ui-dialog-helm",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "app/ui/ui-dialog-helm/src",
+  "prefix": "hlm",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "options": {
+        "project": "app/ui/ui-dialog-helm/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "app/ui/ui-dialog-helm/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "app/ui/ui-dialog-helm/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "app/ui/ui-dialog-helm/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

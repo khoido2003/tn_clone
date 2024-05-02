@@ -7,9 +7,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   toggle: boolean = false;
+  toggleMobileMenu = false;
   currentLanguage: string = 'Tiếng Việt';
   isSearch: boolean = false;
   toggleSearchTimeout: any;
+
+  setToggleMobileMenu() {
+    this.toggleMobileMenu = !this.toggleMobileMenu;
+  }
 
   setToggle() {
     this.toggle = !this.toggle;

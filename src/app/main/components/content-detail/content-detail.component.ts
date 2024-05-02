@@ -1,25 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ContentDetail } from 'src/app/models/content-detail.model';
 
 @Component({
   selector: 'app-content-detail',
   templateUrl: './content-detail.component.html',
   styleUrl: './content-detail.component.scss',
 })
-export class ContentDetailComponent {
-  @Input() item?: {
-    header: string;
-    title: string;
-    desc: string;
-    time: string;
-    recordBy: string;
-    imgData: string[];
-    diaryDetail: {
-      title: string;
-      desc: string;
-      time: string;
-      imgData: string[];
-    }[];
-  };
+export class ContentDetailComponent implements OnInit {
+  @Input() item?: ContentDetail;
+
+  ngOnInit() {
+    // console.log(this.item);
+  }
 
   isOpenDiary = false;
   btnName?: string = 'Xem đầy đủ nhật ký';

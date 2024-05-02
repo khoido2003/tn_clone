@@ -1,9 +1,77 @@
-<h2 class="font-bold text-[1.6rem] relative">
-  {{ header }}
+<hlm-dialog class="">
+  <h2 class="font-bold text-[1.6rem] relative group flex items-center gap-11">
+    {{ header }}
 
-  <div class="absolute top-[6px] left-[-48px]">
-    <div
-      class="w-7 h-7 rounded-full bg-white z-30 border-4 border-primary md:block hidden"
-    ></div>
-  </div>
-</h2>
+    <button
+      brnDialogTrigger
+      hlmBtn
+      (click)="test()"
+      class="sm:block group-hover:block md:hidden text-sm bg-primary text-white rounded-md"
+    >
+      Edit
+    </button>
+
+    <div class="absolute top-[6px] left-[-48px]">
+      <div
+        class="w-7 h-7 rounded-full bg-white z-30 border-4 border-primary md:block hidden"
+      ></div>
+    </div>
+  </h2>
+
+  <hlm-dialog-content
+    class="overflow-x-scroll overflow-y-visible h-[80vh] w-[1200px]"
+    *brnDialogContent="let ctx"
+  >
+    <form action="">
+      <hlm-dialog-header>
+        <h3 hlmDialogTitle>Sửa thông tin</h3>
+        <p hlmDialogDescription>Thêm hoặc xóa các danh mục</p>
+      </hlm-dialog-header>
+
+      <div class="py-4 grid gap-4">
+        <div class="items-center grid grid-cols-4 gap-4 mb-4 border-b-2 pb-4">
+          <label hlmLabel for="header" class="text-right">Header</label>
+          <input
+            hlmInput
+            id="header"
+            placeholder="Chế biến, Đóng gói..."
+            value="{{ item?.header }}"
+            class="col-span-3"
+          />
+        </div>
+
+        <div *ngFor="let step of item?.steps; index as i" class="border-b-2">
+          <div *ngFor="let data of getLabel(step)">
+            <div
+              *ngIf="data !== 'diaryDetail' && data !== 'imgData'"
+              class="items-center grid grid-cols-4 gap-4 mb-2 pb-2"
+            >
+              <label hlmLabel for="{{ data }}" class="text-right capitalize">{{
+                data
+              }}</label>
+              <input
+                *ngIf="data !== 'description'"
+                hlmInput
+                id="{{ data }}"
+                class="col-span-3"
+                value="{{ getDetail(data, step) }}"
+              />
+              <textarea
+                *ngIf="data === 'description'"
+                hlmInput
+                id="{{ data }}"
+                class="col-span-3 h-40"
+                rows="5"
+                cols="33"
+                value="{{ getDetail(data, step) }}"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hlm-dialog-footer>
+        <button class="text-white" hlmBtn type="submit">Save changes</button>
+      </hlm-dialog-footer>
+    </form>
+  </hlm-dialog-content>
+</hlm-dialog>

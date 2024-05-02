@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import {
   BrowserModule,
   provideClientHydration,
@@ -25,6 +25,23 @@ import { StepDetailComponent } from './main/components/step-detail/step-detail.c
 import { ContentDetailComponent } from './main/components/content-detail/content-detail.component';
 import { ContentDetailHeaderComponent } from './main/components/content-detail-header/content-detail-header.component';
 import { DetailDiaryComponent } from './main/components/detail-diary/detail-diary.component';
+import {
+  HlmDialogComponent,
+  HlmDialogContentComponent,
+  HlmDialogDescriptionDirective,
+  HlmDialogFooterComponent,
+  HlmDialogHeaderComponent,
+  HlmDialogTitleDirective,
+} from './ui/ui-dialog-helm/src';
+import {
+  BrnDialogContentDirective,
+  BrnDialogTriggerDirective,
+} from '@spartan-ng/ui-dialog-brain';
+import { HlmButtonDirective } from './ui/ui-button-helm/src/lib/hlm-button.directive';
+import { HlmInputDirective } from './ui/ui-input-helm/src/lib/hlm-input.directive';
+import { HlmLabelDirective } from './ui/ui-label-helm/src/lib/hlm-label.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,6 +60,8 @@ import { DetailDiaryComponent } from './main/components/detail-diary/detail-diar
     DetailDiaryComponent,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HlmCarouselComponent,
@@ -50,8 +69,21 @@ import { DetailDiaryComponent } from './main/components/detail-diary/detail-diar
     HlmCarouselItemComponent,
     HlmCarouselNextComponent,
     HlmCarouselPreviousComponent,
+    BrnDialogTriggerDirective,
+    BrnDialogContentDirective,
+
+    HlmDialogComponent,
+    HlmDialogContentComponent,
+    HlmDialogHeaderComponent,
+    HlmDialogFooterComponent,
+    HlmDialogTitleDirective,
+    HlmDialogDescriptionDirective,
+
+    HlmLabelDirective,
+    HlmInputDirective,
+    HlmButtonDirective,
   ],
-  providers: [provideClientHydration()],
+  providers: [provideClientHydration(), importProvidersFrom(HttpClientModule)],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

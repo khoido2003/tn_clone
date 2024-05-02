@@ -1,11 +1,137 @@
 <div
-  class="max-w-screen-xl flex md:justify-between items-center m-auto py-4 justify-center"
+  *ngIf="toggleMobileMenu"
+  class="bg-gray-100 absolute top-0 bottom-0 left-0 right-0 z-50 transition-opacity duration-300 ease-in-out p-5"
 >
-  <a routerLink="/">
+  <div class="relative">
+    <svg
+      (click)="setToggleMobileMenu()"
+      xmlns="http://www.w3.org/2000/svg"
+      width="25"
+      height="25"
+      fill="currentColor"
+      class="bi bi-x-lg absolute left-0 top-0 cursor-pointer z-[100]"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+      />
+    </svg>
+  </div>
+
+  <div class="justify-center items-start flex-col flex gap-6 mt-20 w-full">
+    <!-- ///////////////////////////////////////////////// -->
+    <!-- SignIn/SignUp -->
+    <div class="flex justify-between items-center w-[80vw]">
+      <button
+        class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 text-[1.6rem]"
+      >
+        Đăng nhập / Đăng ký
+      </button>
+
+      <!-- Change Language -->
+      <div
+        class="fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-transparent"
+        [ngClass]="toggle ? 'block' : 'hidden'"
+        (click)="setToggle()"
+      ></div>
+
+      <div class="relative w-[12rem] z-30">
+        <button
+          (click)="setToggle()"
+          class="flex justify-center items-center gap-2"
+        >
+          <img
+            *ngIf="currentLanguage === 'Tiếng Việt'"
+            class="w-10"
+            src="../../../assets/vn-flag.svg"
+            alt="flag icon"
+          />
+
+          <img
+            *ngIf="currentLanguage === 'English'"
+            class="w-10"
+            src="../../../assets/uk-flag.svg"
+            alt="flag icon"
+          />
+          <p class="text-[1.3rem]">{{ currentLanguage }}</p>
+          <img
+            src="../../../assets/down-arrow.svg"
+            class="w-5"
+            alt="down arrow"
+            [ngClass]="
+              toggle ? 'rotate-180 transition-all' : 'rotate-0 transition-all'
+            "
+          />
+        </button>
+
+        <div
+          *ngIf="toggle"
+          class="bg-gray-300/90 absolute top-10 flex flex-col gap-3 p-2 rounded-md shadow-md animate-moveIn"
+        >
+          <button
+            class="flex justify-start items-center gap-2 hover:bg-gray-300/80 p-1 rounded-md"
+          >
+            <img
+              class="w-10"
+              src="../../../assets/vn-flag.svg"
+              alt="flag icon"
+            />
+            <p class="text-[1.3rem]" (click)="setLanguage('Tiếng Việt')">
+              Tiếng Việt
+            </p>
+          </button>
+
+          <button
+            class="flex justify-start items-center gap-2 hover:bg-gray-300/80 p-1 rounded-md"
+          >
+            <img
+              class="w-10"
+              src="../../../assets/uk-flag.svg"
+              alt="flag icon"
+            />
+            <p class="text-[1.3rem]" (click)="setLanguage('English')">
+              English
+            </p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ///////////////////////////////////////////////// -->
+    <!-- Search functionality -->
+    <div class="">
+      <input
+        placeholder="Nhập từ khóa..."
+        type="text"
+        class="rounded-md border-2 shadow-lg border-gray-400 bg-gray-300 h-20 w-[80vw] p-2 text-lg"
+      />
+    </div>
+  </div>
+</div>
+
+<div
+  class="max-w-screen-xl flex justify-evenly md:justify-between items-center m-auto py-4"
+>
+  <svg
+    (click)="setToggleMobileMenu()"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    fill="currentColor"
+    class="bi bi-list md:hidden block cursor-pointer"
+    viewBox="0 0 16 16"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+    />
+  </svg>
+
+  <a routerLink="/" class="block">
     <img
       src="../../../assets/logo-svg.svg"
       alt="Logo"
-      class="h-[50px] md:h-[70px]"
+      class="h-[50px] md:h-[50px]"
     />
   </a>
   <div class="hidden justify-center items-center md:gap-7 lg:gap-10 md:flex">
@@ -23,9 +149,21 @@
       <button
         *ngIf="!isSearch"
         (click)="toggleSearch()"
-        class="absolute left-[-11px] top-[-21px]"
+        class="absolute left-[-11px] top-[-12px]"
       >
-        <i class="bi bi-search text-[1.5rem]"></i>
+        <!-- <i class="bi bi-search text-b"></i> -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          fill="currentColor"
+          class="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+          />
+        </svg>
       </button>
 
       <div
@@ -43,11 +181,28 @@
           type="text"
           class="rounded-md border-2 shadow-lg border-gray-400 bg-white h-10 w-96 pl-4"
         />
-        <i
+        <!-- <i
           *ngIf="isSearch"
           (click)="toggleSearch()"
           class="bi bi-x text-[2rem] absolute right-[2px] top-[-8px] cursor-pointer"
-        ></i>
+        >
+          </i
+        > -->
+
+        <svg
+          *ngIf="isSearch"
+          (click)="toggleSearch()"
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          fill="currentColor"
+          class="bi bi-x-lg absolute right-[2px] top-[8px] cursor-pointer"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+          />
+        </svg>
       </div>
     </div>
 
