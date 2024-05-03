@@ -1,6 +1,19 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ContentDetail } from 'src/app/models/content-detail.model';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { toast } from 'ngx-sonner';
+import {
+  ContentDetail,
+  ContentDetailUpdate,
+} from 'src/app/models/content-detail.model';
 import { ContentDetailService } from 'src/app/services/content-detail.service';
 
 export interface Step {
@@ -29,23 +42,89 @@ enum StepDetail {
 @Component({
   selector: 'app-content-detail-header',
   templateUrl: './content-detail-header.component.html',
-  styleUrl: './content-detail-header.component.scss',
+  styleUrls: ['./content-detail-header.component.scss'],
 })
-export class ContentDetailHeaderComponent {
+export class ContentDetailHeaderComponent implements OnChanges {
   @Input() header?: string;
   @Input() item?: ContentDetail;
+  @Output() newItemEvent = new EventEmitter();
+
+  formGroup: FormGroup;
 
   constructor(
     private contentDetailService: ContentDetailService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
+    this.formGroup = this.formBuilder.group({
+      header: [''],
+    });
+  }
 
-  onSubmit(data: any): void {
-    console.log(data);
+  triggerParentRerender() {
+    this.newItemEvent.emit('re-render');
   }
-  test() {
-    // console.log(this.item);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['item'] && !changes['item'].firstChange) {
+      // React to changes in 'item' input
+      // For example, update form values or trigger other actions
+      this.updateFormGroup();
+    }
   }
+
+  onSubmit(id: string): void {
+    const updatedData = {
+      id: id,
+      header: this.formGroup.value.header,
+    };
+
+    if (updatedData && this.item) {
+      this.contentDetailService.updateData(updatedData, id).subscribe({
+        next: () => {
+          (this.item as ContentDetailUpdate) = updatedData;
+        },
+        complete: () => {
+          toast('Updated successfully!', {
+            description:
+              'Your data has been updated, close the notification to continue.',
+            action: {
+              label: 'Close',
+              onClick: () => {
+                this.router.navigate(['/']);
+              },
+            },
+          });
+          this.triggerParentRerender();
+        },
+      });
+    }
+  }
+
+  deleteData(id: string) {
+    this.contentDetailService.deleteData(id).subscribe({
+      next: () => {
+        toast('Deleted successfully!', {
+          description:
+            'Your data has been deleted, close the notification to continue.',
+          action: {
+            label: 'Close',
+            onClick: () => {
+              this.router.navigate(['/']);
+              window.location.reload();
+            },
+          },
+        });
+        this.triggerParentRerender();
+      },
+      complete: () => {
+        this.triggerParentRerender();
+        window.location.reload();
+      },
+    });
+  }
+
+  reRender(e: Event): void {}
 
   getLabel(inp: Step): StepDetail[] {
     return Object.keys(inp) as StepDetail[];
@@ -53,5 +132,13 @@ export class ContentDetailHeaderComponent {
 
   getDetail(inp: StepDetail, step: Step) {
     return step[inp];
+  }
+
+  private updateFormGroup(): void {
+    if (this.item) {
+      this.formGroup.patchValue({
+        header: this.item.header,
+      });
+    }
   }
 }

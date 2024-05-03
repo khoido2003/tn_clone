@@ -15,3 +15,8 @@ export interface ContentDetail {
     }[];
   }[];
 }
+
+export interface ContentDetailUpdate {
+  id: string;
+  header: string;
+}

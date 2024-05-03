@@ -42,6 +42,20 @@ import { HlmInputDirective } from './ui/ui-input-helm/src/lib/hlm-input.directiv
 import { HlmLabelDirective } from './ui/ui-label-helm/src/lib/hlm-label.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HlmToasterComponent } from './ui/ui-sonner-helm/src/lib/hlm-toaster.component';
+import {
+  BrnAlertDialogContentDirective,
+  BrnAlertDialogTriggerDirective,
+} from '@spartan-ng/ui-alertdialog-brain';
+import { HlmAlertDialogComponent } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog.component';
+import { HlmAlertDialogOverlayDirective } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-overlay.directive';
+import { HlmAlertDialogHeaderComponent } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-header.component';
+import { HlmAlertDialogFooterComponent } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-footer.component';
+import { HlmAlertDialogTitleDirective } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-title.directive';
+import { HlmAlertDialogDescriptionDirective } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-description.directive';
+import { HlmAlertDialogCancelButtonDirective } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-cancel-button.directive';
+import { HlmAlertDialogActionButtonDirective } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-action-button.directive';
+import { HlmAlertDialogContentComponent } from './ui/ui-alertdialog-helm/src/lib/hlm-alert-dialog-content.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +96,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HlmLabelDirective,
     HlmInputDirective,
     HlmButtonDirective,
+    HlmToasterComponent,
+
+    BrnAlertDialogTriggerDirective,
+    BrnAlertDialogContentDirective,
+
+    HlmAlertDialogComponent,
+    HlmAlertDialogOverlayDirective,
+    HlmAlertDialogHeaderComponent,
+    HlmAlertDialogFooterComponent,
+    HlmAlertDialogTitleDirective,
+    HlmAlertDialogDescriptionDirective,
+    HlmAlertDialogCancelButtonDirective,
+    HlmAlertDialogActionButtonDirective,
+    HlmAlertDialogContentComponent,
   ],
   providers: [provideClientHydration(), importProvidersFrom(HttpClientModule)],
   bootstrap: [AppComponent],

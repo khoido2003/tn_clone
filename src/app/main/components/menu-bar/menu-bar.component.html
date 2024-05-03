@@ -39,6 +39,7 @@
         <app-content-detail
           *ngFor="let item of data"
           [item]="item"
+          (newEvent)="reFetchData($event)"
         ></app-content-detail>
 
         <!-- <p *ngFor="let item of data">{{ test(item) }}</p> -->

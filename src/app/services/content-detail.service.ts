@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ContentDetail } from '../models/content-detail.model';
+import {
+  ContentDetail,
+  ContentDetailUpdate,
+} from '../models/content-detail.model';
 import { Observable, retry } from 'rxjs';
 
 @Injectable({
@@ -15,7 +18,20 @@ export class ContentDetailService {
     return this.data;
   }
 
-  updateData(data: ContentDetail[], id: string) {
-    this.http.put<ContentDetail[]>(`http://localhost:3000/data/${id}`, data);
+  updateData(data: ContentDetailUpdate, id: string) {
+    return this.http.put<ContentDetailUpdate>(
+      `http://localhost:3000/data/${id}`,
+      data
+    );
+  }
+
+  getData(id: string) {
+    this.http
+      .get(`http://localhost:3000/data/${id}`)
+      .subscribe((data) => console.log(data));
+  }
+
+  deleteData(id: string) {
+    return this.http.delete(`http://localhost:3000/data/${id}`);
   }
 }

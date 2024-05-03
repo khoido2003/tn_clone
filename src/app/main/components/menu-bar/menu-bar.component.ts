@@ -7,7 +7,7 @@ import { ContentDetailService } from 'src/app/services/content-detail.service';
   templateUrl: './menu-bar.component.html',
   styleUrl: './menu-bar.component.scss',
 })
-export class MenuBarComponent implements OnInit, OnChanges {
+export class MenuBarComponent implements OnInit {
   menuItems = [
     'Vùng nguyên liệu',
     'Truy xuất nguồn gốc',
@@ -31,10 +31,6 @@ export class MenuBarComponent implements OnInit, OnChanges {
     this.getContentDetail();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.getContentDetail();
-  }
-
   setActiveTab(curActiveTab: number) {
     this.activeTab = curActiveTab;
   }
@@ -45,5 +41,11 @@ export class MenuBarComponent implements OnInit, OnChanges {
 
   test(inp: ContentDetail) {
     return JSON.stringify(inp);
+  }
+
+  reFetchData(event: string) {
+    console.log(event);
+    console.log('Hi');
+    console.log(this.data);
   }
 }

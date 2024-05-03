@@ -4,6 +4,7 @@
   *ngIf="item?.header"
   [header]="item?.header"
   [item]="item"
+  (newItemEvent)="handleEvent($event, item!.id)"
 ></app-content-detail-header>
 
 <div class="mt-4 md:p-0 p-4" *ngFor="let step of item?.steps">

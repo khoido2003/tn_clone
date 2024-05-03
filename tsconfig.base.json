@@ -34,6 +34,9 @@
       ],
       "@spartan-ng/ui-alertdialog-helm": [
         "src/app/ui/ui-alertdialog-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-sonner-helm": [
+        "src/app/ui/ui-sonner-helm/src/index.ts"
       ]
     }
   }
