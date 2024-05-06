@@ -19,6 +19,7 @@ export class MenuBarComponent implements OnInit {
   items = ['1', '2'];
 
   data: ContentDetail[] = [];
+  filteredData: ContentDetail[] = [];
 
   constructor(private contentDetailService: ContentDetailService) {
     contentDetailService.getAllData().subscribe((d) => {
@@ -27,8 +28,37 @@ export class MenuBarComponent implements OnInit {
     });
   }
 
+  searchQuery: string = '';
+
+  filterData(event: any): void {
+    const value = this.searchQuery.toLowerCase(); // Convert input value to lowercase for case-insensitive filtering
+
+    if (value) {
+      this.filteredData = this.data
+        .map((d) => {
+          return {
+            ...d,
+            steps: d.steps.filter(
+              (v) =>
+                v.title.toLowerCase().includes(value) ||
+                v.description.toLowerCase().includes(value) ||
+                v.recordBy.toLowerCase().includes(value)
+            ),
+          };
+        })
+        .filter((d) => d.steps.length > 0); // Remove entries without matching steps
+    } else {
+      this.filteredData = this.data;
+    }
+
+    console.log(this.searchQuery);
+    console.log(this.data);
+    console.log(this.filteredData);
+  }
+
   ngOnInit(): void {
     this.getContentDetail();
+    this.filteredData = this.data;
   }
 
   setActiveTab(curActiveTab: number) {

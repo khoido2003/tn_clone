@@ -20,6 +20,21 @@
     *ngIf="activeTab === 1"
     class="mt-4 shadow-lg border-2 w-full rounded-lg border-2] p-10"
   >
+    <div>
+      <form
+        action="
+     "
+        (submit)="filterData($event)"
+      >
+        <input
+          type="text"
+          placeholder="Tìm kiếm..."
+          class="block h-12 p-2 py-4 w-[80%] m-auto bg-white rounded-md mb-4 shadow-sm border-slate-200 border-2"
+          [(ngModel)]="searchQuery"
+          name="searchQuery"
+        />
+      </form>
+    </div>
     <div class="mb-4 ml-10">
       <h3 class="text-primary font-extrabold text-[1.6rem]">
         Truy xuất nguồn gốc
@@ -37,7 +52,7 @@
           class="absolute h-full bg-gray-300 w-[7px] left-[-37px] rounded-lg md:block hidden"
         ></div>
         <app-content-detail
-          *ngFor="let item of data"
+          *ngFor="let item of filteredData"
           [item]="item"
           (newEvent)="reFetchData($event)"
         ></app-content-detail>

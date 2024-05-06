@@ -7,7 +7,8 @@
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
-    "serve:ssr:tn-clone": "node dist/tn-clone/server/server.mjs"
+    "serve:ssr:tn-clone": "node dist/tn-clone/server/server.mjs",
+    "db": "npx json-server db.json"
   },
   "private": true,
   "dependencies": {
