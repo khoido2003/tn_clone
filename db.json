@@ -2,7 +2,7 @@
   "data": [
     {
       "id": "1",
-      "header": "Chế biến và đóng gói",
+      "header": "Chế biến và đóng gói ",
       "steps": [
         {
           "title": "Đóng gói",
@@ -114,7 +114,7 @@
     },
     {
       "id": "2",
-      "header": "Sản xuất nguyên liệu",
+      "header": "Sản xuất nguyên liệu ",
       "steps": [
         {
           "id": "1",

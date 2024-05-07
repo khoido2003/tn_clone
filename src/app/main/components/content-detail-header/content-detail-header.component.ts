@@ -105,8 +105,20 @@ export class ContentDetailHeaderComponent implements OnChanges, OnInit {
               },
             },
           });
-          this.triggerParentRerender();
-          window.location.reload();
+
+          this.header = this.headerData;
+        },
+        error: () => {
+          toast('Something went wrong!', {
+            description:
+              'Your data has not been updated, close the notification to continue.',
+            action: {
+              label: 'Close',
+              onClick: () => {
+                this.router.navigate(['/']);
+              },
+            },
+          });
         },
       });
     }

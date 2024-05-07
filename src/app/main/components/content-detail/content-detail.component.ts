@@ -20,6 +20,7 @@ export class ContentDetailComponent implements OnInit, OnChanges {
   @Output() newEvent = new EventEmitter();
 
   handleEvent(event: string, id: string) {
+    console.log(event);
     this.newEvent.emit(event);
     this.contentDetailService.getData(id);
   }

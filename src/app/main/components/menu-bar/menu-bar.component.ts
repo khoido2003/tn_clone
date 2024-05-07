@@ -24,7 +24,7 @@ export class MenuBarComponent implements OnInit {
   constructor(private contentDetailService: ContentDetailService) {
     contentDetailService.getAllData().subscribe((d) => {
       this.data = d;
-      console.log(this.data[0]);
+      console.log(this.data);
     });
   }
 
@@ -50,10 +50,6 @@ export class MenuBarComponent implements OnInit {
     } else {
       this.filteredData = this.data;
     }
-
-    console.log(this.searchQuery);
-    console.log(this.data);
-    console.log(this.filteredData);
   }
 
   ngOnInit(): void {
@@ -75,7 +71,7 @@ export class MenuBarComponent implements OnInit {
 
   reFetchData(event: string) {
     console.log(event);
-    console.log('Hi');
+
     console.log(this.data);
   }
 }
