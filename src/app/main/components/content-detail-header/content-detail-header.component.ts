@@ -44,21 +44,28 @@ enum StepDetail {
   templateUrl: './content-detail-header.component.html',
   styleUrls: ['./content-detail-header.component.scss'],
 })
-export class ContentDetailHeaderComponent implements OnChanges {
+export class ContentDetailHeaderComponent implements OnChanges, OnInit {
   @Input() header?: string;
   @Input() item?: ContentDetail;
   @Output() newItemEvent = new EventEmitter();
 
-  formGroup: FormGroup;
+  // formGroup: FormGroup;
+  newEditData = this.item;
+  headerData = this.newEditData?.header;
 
   constructor(
     private contentDetailService: ContentDetailService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    this.formGroup = this.formBuilder.group({
-      header: [''],
-    });
+    // this.formGroup = this.formBuilder.group({
+    //   header: this.item?.header,
+    // });
+  }
+
+  ngOnInit(): void {
+    this.newEditData = this.item;
+    this.headerData = this.newEditData?.header;
   }
 
   triggerParentRerender() {
@@ -69,20 +76,23 @@ export class ContentDetailHeaderComponent implements OnChanges {
     if (changes['item'] && !changes['item'].firstChange) {
       // React to changes in 'item' input
       // For example, update form values or trigger other actions
-      this.updateFormGroup();
+      // this.updateFormGroup();
     }
   }
 
   onSubmit(id: string): void {
     const updatedData = {
       id: id,
-      header: this.formGroup.value.header,
+      header: this.headerData!,
+      steps: [...this.item!.steps],
     };
+
+    console.log(updatedData);
 
     if (updatedData && this.item) {
       this.contentDetailService.updateData(updatedData, id).subscribe({
         next: () => {
-          (this.item as ContentDetailUpdate) = updatedData;
+          (this.item as ContentDetail) = updatedData!;
         },
         complete: () => {
           toast('Updated successfully!', {
@@ -96,6 +106,7 @@ export class ContentDetailHeaderComponent implements OnChanges {
             },
           });
           this.triggerParentRerender();
+          window.location.reload();
         },
       });
     }
@@ -134,11 +145,11 @@ export class ContentDetailHeaderComponent implements OnChanges {
     return step[inp];
   }
 
-  private updateFormGroup(): void {
-    if (this.item) {
-      this.formGroup.patchValue({
-        header: this.item.header,
-      });
-    }
-  }
+  // private updateFormGroup(): void {
+  //   if (this.item) {
+  //     this.formGroup.patchValue({
+  //       header: this.item.header,
+  //     });
+  //   }
+  // }
 }

@@ -16,42 +16,24 @@
         class="overflow-x-scroll overflow-y-visible w-[1200px]"
         *brnDialogContent="let ctx"
       >
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(item!.id)">
+        <form (submit)="onSubmit(item!.id)">
           <h3 hlmDialogTitle>Sửa thông tin</h3>
           <p hlmDialogDescription>Thêm hoặc xóa các danh mục</p>
 
           <div class="py-4 grid gap-4">
             <div
-              class="items-center grid grid-cols-4 gap-4 mb-4 border-b-2 pb-4"
+              class="items-center grid grid-cols-6 gap-4 mb-4 border-b-2 pb-4"
             >
               <label hlmLabel for="header" class="text-right">Header</label>
               <input
                 hlmInput
-                formControlName="header"
                 id="header"
-                placeholder="Chế biến, Đóng gói..."
-                class="col-span-3"
+                class="col-span-6"
+                [(ngModel)]="headerData"
+                name="headerData"
+                value="{{ headerData }}"
               />
             </div>
-
-            <!-- <div *ngFor="let step of item?.steps; index as i" class="border-b-2">
-            <div *ngFor="let data of getLabel(step)">
-              <div
-                *ngIf="data !== 'diaryDetail' && data !== 'imgData'"
-                class="items-center grid grid-cols-4 gap-4 mb-2 pb-2"
-              >
-                <label hlmLabel for="{{ data }}" class="text-right capitalize">{{
-                  data
-                }}</label>
-                <input
-                  hlmInput
-                  formControlName="{{ data }}"
-                  [id]="data"
-                  class="col-span-3"
-                />
-              </div>
-            </div>
-          </div> -->
           </div>
           <hlm-dialog-footer>
             <button

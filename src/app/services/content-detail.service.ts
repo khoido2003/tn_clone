@@ -19,7 +19,7 @@ export class ContentDetailService {
   }
 
   updateData(data: ContentDetailUpdate, id: string) {
-    return this.http.put<ContentDetailUpdate>(
+    return this.http.put<ContentDetail>(
       `http://localhost:3000/data/${id}`,
       data
     );
